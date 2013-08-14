@@ -1,33 +1,33 @@
 <?php
 
-namespace Cron\Tests;
+//namespace Cron\Tests;
 
-use Cron\HoursField;
-use DateTime;
+//use Cron\HoursField;
+//use DateTime;
 
 /**
  * @author Michael Dowling <mtdowling@gmail.com>
  */
-class HoursFieldTest extends \PHPUnit_Framework_TestCase
+class Cron_HoursFieldTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Cron\HoursField::validate
+     * @covers Cron_HoursField::validate
      */
     public function testValdatesField()
     {
-        $f = new HoursField();
+        $f = new Cron_HoursField();
         $this->assertTrue($f->validate('1'));
         $this->assertTrue($f->validate('*'));
         $this->assertTrue($f->validate('*/3,1,1-12'));
      }
 
     /**
-     * @covers Cron\HoursField::increment
+     * @covers Cron_HoursField::increment
      */
     public function testIncrementsDate()
     {
         $d = new DateTime('2011-03-15 11:15:00');
-        $f = new HoursField();
+        $f = new Cron_HoursField();
         $f->increment($d);
         $this->assertEquals('2011-03-15 12:00:00', $d->format('Y-m-d H:i:s'));
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace Cron;
+//namespace Cron;
 
-use DateTime;
+//use DateTime;
 
 /**
  * Year field.  Allows: * , / -
  *
  * @author Michael Dowling <mtdowling@gmail.com>
  */
-class YearField extends AbstractField
+class Cron_YearField extends Cron_AbstractField
 {
     /**
      * {@inheritdoc}

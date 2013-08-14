@@ -1,15 +1,15 @@
 <?php
 
-namespace Cron;
+//namespace Cron;
 
-use DateTime;
+//use DateTime;
 
 /**
  * CRON field interface
  *
  * @author Michael Dowling <mtdowling@gmail.com>
  */
-interface FieldInterface
+interface Cron_FieldInterface
 {
     /**
      * Check if the respective value of a DateTime field satisfies a CRON exp
@@ -28,7 +28,7 @@ interface FieldInterface
      * @param DateTime $date   DateTime object to change
      * @param bool     $invert (optional) Set to TRUE to decrement
      *
-     * @return FieldInterface
+     * @return Cron_FieldInterface
      */
     public function increment(DateTime $date, $invert = false);
 

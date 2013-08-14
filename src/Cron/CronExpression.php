@@ -1,11 +1,11 @@
 <?php
 
-namespace Cron;
+//namespace Cron;
 
-use DateTime;
-use DateTimeZone;
-use RuntimeException;
-use InvalidArgumentException;
+//use DateTime;
+//use DateTimeZone;
+//use RuntimeException;
+//use InvalidArgumentException;
 
 /**
  * CRON expression parser that can determine whether or not a CRON expression is
@@ -20,7 +20,7 @@ use InvalidArgumentException;
  * @author Michael Dowling <mtdowling@gmail.com>
  * @link http://en.wikipedia.org/wiki/Cron
  */
-class CronExpression
+class Cron_CronExpression
 {
     const MINUTE = 0;
     const HOUR = 1;
@@ -35,7 +35,7 @@ class CronExpression
     private $cronParts;
 
     /**
-     * @var FieldFactory CRON field factory
+     * @var Cron_FieldFactory CRON field factory
      */
     private $fieldFactory;
 
@@ -45,7 +45,7 @@ class CronExpression
     private static $order = array(self::YEAR, self::MONTH, self::DAY, self::WEEKDAY, self::HOUR, self::MINUTE);
 
     /**
-     * Factory method to create a new CronExpression.
+     * Factory method to create a new Cron_CronExpression.
      *
      * @param string $expression The CRON expression to create.  There are
      *      several special predefined values which can be used to substitute the
@@ -56,11 +56,11 @@ class CronExpression
      *      @weekly - Run once a week, midnight on Sun - 0 0 * * 0
      *      @daily - Run once a day, midnight - 0 0 * * *
      *      @hourly - Run once an hour, first minute - 0 * * * *
-     * @param FieldFactory $fieldFactory (optional) Field factory to use
+     * @param Cron_FieldFactory $fieldFactory (optional) Field factory to use
      *
-     * @return CronExpression
+     * @return Cron_CronExpression
      */
-    public static function factory($expression, FieldFactory $fieldFactory = null)
+    public static function factory($expression, Cron_FieldFactory $fieldFactory = null)
     {
         $mappings = array(
             '@yearly' => '0 0 1 1 *',
@@ -75,16 +75,16 @@ class CronExpression
             $expression = $mappings[$expression];
         }
 
-        return new static($expression, $fieldFactory ?: new FieldFactory());
+        return new /*static*/Cron_CronExpression($expression, $fieldFactory ? $fieldFactory : new Cron_FieldFactory());
     }
 
     /**
      * Parse a CRON expression
      *
      * @param string       $expression   CRON expression (e.g. '8 * * * *')
-     * @param FieldFactory $fieldFactory Factory to create cron fields
+     * @param Cron_FieldFactory $fieldFactory Factory to create cron fields
      */
-    public function __construct($expression, FieldFactory $fieldFactory)
+    public function __construct($expression, Cron_FieldFactory $fieldFactory)
     {
         $this->fieldFactory = $fieldFactory;
         $this->setExpression($expression);
@@ -95,7 +95,7 @@ class CronExpression
      *
      * @param string $schedule CRON expression (e.g. 8 * * * *)
      *
-     * @return CronExpression
+     * @return Cron_CronExpression
      * @throws InvalidArgumentException if not a valid CRON expression
      */
     public function setExpression($value)
@@ -120,7 +120,7 @@ class CronExpression
      * @param int    $position The position of the CRON expression to set
      * @param string $value    The value to set
      *
-     * @return CronExpression
+     * @return Cron_CronExpression
      * @throws InvalidArgumentException if the value is not valid for the part
      */
     public function setPart($position, $value)
@@ -167,7 +167,7 @@ class CronExpression
      *
      * @return DateTime
      * @throws RuntimeExpression on too many iterations
-     * @see Cron\CronExpression::getNextRunDate
+     * @see Cron_CronExpression::getNextRunDate
      */
     public function getPreviousRunDate($currentTime = 'now', $nth = 0, $allowCurrentDate = false)
     {
@@ -246,10 +246,10 @@ class CronExpression
             $currentTime = new DateTime($currentTime);
             $currentTime->setTime($currentTime->format('H'), $currentTime->format('i'), 0);
             $currentDate = $currentTime->format('Y-m-d H:i');
-            $currentTime = $currentTime->getTimeStamp();
+            $currentTime = $currentTime->/*getTimestamp()*/format("U");
         }
 
-        return $this->getNextRunDate($currentDate, 0, true)->getTimestamp() == $currentTime;
+        return $this->getNextRunDate($currentDate, 0, true)->/*getTimestamp()*/format("U") == $currentTime;
     }
 
     /**
@@ -268,7 +268,7 @@ class CronExpression
     {
         $currentDate = $currentTime instanceof DateTime
             ? $currentTime
-            : new DateTime($currentTime ?: 'now');
+            : new DateTime($currentTime ? $currentTime : 'now');
 
         // set the timezone
         $currentDate->setTimezone(new DateTimeZone(date_default_timezone_get()));

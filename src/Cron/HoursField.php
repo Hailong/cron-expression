@@ -1,16 +1,16 @@
 <?php
 
-namespace Cron;
+//namespace Cron;
 
-use DateTime;
-use DateTimeZone;
+//use DateTime;
+//use DateTimeZone;
 
 /**
  * Hours field.  Allows: * , / -
  *
  * @author Michael Dowling <mtdowling@gmail.com>
  */
-class HoursField extends AbstractField
+class Cron_HoursField extends Cron_AbstractField
 {
     /**
      * {@inheritdoc}

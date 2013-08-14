@@ -1,15 +1,15 @@
 <?php
 
-namespace Cron;
+//namespace Cron;
 
-use DateTime;
+//use DateTime;
 
 /**
  * Minutes field.  Allows: * , / -
  *
  * @author Michael Dowling <mtdowling@gmail.com>
  */
-class MinutesField extends AbstractField
+class Cron_MinutesField extends Cron_AbstractField
 {
     /**
      * {@inheritdoc}

@@ -1,9 +1,9 @@
 <?php
 
-namespace Cron;
+//namespace Cron;
 
-use DateTime;
-use InvalidArgumentException;
+//use DateTime;
+//use InvalidArgumentException;
 
 /**
  * Day of week field.  Allows: * / , - ? L #
@@ -20,7 +20,7 @@ use InvalidArgumentException;
  *
  * @author Michael Dowling <mtdowling@gmail.com>
  */
-class DayOfWeekField extends AbstractField
+class Cron_DayOfWeekField extends Cron_AbstractField
 {
     /**
      * {@inheritdoc}

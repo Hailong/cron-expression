@@ -1,8 +1,8 @@
 <?php
 
-namespace Cron;
+//namespace Cron;
 
-use DateTime;
+//use DateTime;
 
 /**
  * Day of month field.  Allows: * , / - ? L W
@@ -22,7 +22,7 @@ use DateTime;
  *
  * @author Michael Dowling <mtdowling@gmail.com>
  */
-class DayOfMonthField extends AbstractField
+class Cron_DayOfMonthField extends Cron_AbstractField
 {
     /**
      * Get the nearest day of the week for a given day in a month
@@ -36,7 +36,8 @@ class DayOfMonthField extends AbstractField
     private static function getNearestWeekday($currentYear, $currentMonth, $targetDay)
     {
         $tday = str_pad($targetDay, 2, '0', STR_PAD_LEFT);
-        $target = DateTime::createFromFormat('Y-m-d', "$currentYear-$currentMonth-$tday");
+        //$target = DateTime::createFromFormat('Y-m-d', "$currentYear-$currentMonth-$tday");
+        $target = new DateTime(sprintf('%s-%02d-%02d', $currentYear, $currentMonth, $targetDay));
         $currentWeekday = (int) $target->format('N');
 
         if ($currentWeekday < 6) {
